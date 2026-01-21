@@ -1,0 +1,25 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+backend/.env
+backend/.env.local
+backend/venv/
+backend/.venv/
+backend/env/
+.venv/
+venv/
+env/
+
+# MacOS
+.DS_Store
+*.pem
+
+# generated native folders
+/ios
+/android
+
+# Docker
+.Dockerfile
+.dockerignore
