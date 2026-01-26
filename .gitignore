@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Environment variables
 .env
 .env.local
@@ -23,3 +24,40 @@ env/
 # Docker
 .Dockerfile
 .dockerignore
+=======
+# Environment
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.venv/
+venv/
+ENV/
+
+# Node
+node_modules/
+dist/
+.npm
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
+
+# Database
+*.db
+*.sqlite3
+>>>>>>> db98c19313cb6ef120a9d30c22f075229f0bf918
