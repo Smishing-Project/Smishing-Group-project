@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 고령층 대상 서비스 기본 스타일 */
+body {
+  font-size: 18px;
+  line-height: 1.6;
+}

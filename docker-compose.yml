@@ -1,0 +1,66 @@
+services:
+  # ============================================================================
+  # PostgreSQL + pgvector 데이터베이스
+  # ============================================================================
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: smishing-db
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-smishing_db}
+      POSTGRES_HOST_AUTH_METHOD: trust  # 로컬 개발용 - 비밀번호 없이 연결 허용
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # FastAPI 백엔드
+  # ============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: smishing-backend
+    ports:
+      - "8001:8000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-postgres}
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-smishing_db}
+      - SECRET_KEY=${SECRET_KEY:-your-secret-key}
+    volumes:
+      - ./backend:/app  # 핫 리로드용
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # ============================================================================
+  # React + Vite 프론트엔드
+  # ============================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: smishing-frontend
+    ports:
+      - "5000:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend
+
+# ==============================================================================
+# 볼륨 설정
+# ==============================================================================
+volumes:
+  postgres_data:
