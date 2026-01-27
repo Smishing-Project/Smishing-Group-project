@@ -3,6 +3,8 @@ services:
   # PostgreSQL + pgvector 데이터베이스
   # ============================================================================
   db:
+    # Mac(M1/M2) 호환성 위해 amd64 지정 (필요시 주석 해제)
+    # platform: linux/amd64 
     image: pgvector/pgvector:pg16
     container_name: smishing-db
     environment:
@@ -11,7 +13,7 @@ services:
       POSTGRES_DB: ${DB_NAME:-smishing_db}
       POSTGRES_HOST_AUTH_METHOD: trust  # 로컬 개발용 - 비밀번호 없이 연결 허용
     ports:
-      - "5432:5432"
+      - "${DB_PORT_EXTERNAL:-5432}:5432"  # 외부 포트 충돌 시 .env에서 변경 가능
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -29,7 +31,7 @@ services:
       dockerfile: Dockerfile
     container_name: smishing-backend
     ports:
-      - "8001:8000"
+      - "${BACKEND_PORT:-8001}:8000"
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER:-postgres}
@@ -52,7 +54,7 @@ services:
       dockerfile: Dockerfile
     container_name: smishing-frontend
     ports:
-      - "5000:5173"
+      - "${FRONTEND_PORT:-5000}:5173"
     volumes:
       - ./frontend:/app
       - /app/node_modules
