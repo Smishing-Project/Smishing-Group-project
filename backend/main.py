@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from app.db.database import create_tables
 
 app = FastAPI(
     title="스미싱 예방 코치 API",
@@ -15,6 +16,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+async def init_tables() -> None:
+    await create_tables()
 
 
 @app.get("/")
