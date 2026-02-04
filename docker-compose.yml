@@ -32,6 +32,8 @@ services:
     container_name: smishing-backend
     ports:
       - "${BACKEND_PORT:-8001}:8000"
+    env_file:
+      - .env
     environment:
       - DB_HOST=db
       - DB_USER=${DB_USER:-postgres}
@@ -39,6 +41,7 @@ services:
       - DB_PORT=5432
       - DB_NAME=${DB_NAME:-smishing_db}
       - SECRET_KEY=${SECRET_KEY:-your-secret-key}
+      - GOOGLE_SAFE_BROWSING_API_KEY=${GOOGLE_SAFE_BROWSING_API_KEY}
     volumes:
       - ./backend:/app  # 핫 리로드용
     depends_on:
