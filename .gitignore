@@ -47,10 +47,7 @@ Thumbs.db
 *.sqlite3
 
 # ML Models (large files)
-backend/models/*.pkl
-backend/models/*.h5
-backend/models/*.pt
-backend/models/*.pth
+backend/models/
 backend/data/urls/raw/*.csv
 backend/data/urls/raw/*.json
 backend/data/urls/raw/*.txt
