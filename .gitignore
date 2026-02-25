@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Environment variables
 .env
 .env.local
@@ -6,27 +5,6 @@
 *.env
 backend/.env
 backend/.env.local
-backend/venv/
-backend/.venv/
-backend/env/
-.venv/
-venv/
-env/
-
-# MacOS
-.DS_Store
-*.pem
-
-# generated native folders
-/ios
-/android
-
-# Docker
-.Dockerfile
-.dockerignore
-=======
-# Environment
-.env
 
 # Python
 __pycache__/
@@ -34,8 +12,12 @@ __pycache__/
 *$py.class
 .Python
 *.so
+backend/venv/
+backend/.venv/
+backend/env/
 .venv/
 venv/
+env/
 ENV/
 
 # Node
@@ -53,11 +35,26 @@ dist/
 # OS
 .DS_Store
 Thumbs.db
+*.pem
 
 # Docker
 *.log
+.Dockerfile
+.dockerignore
 
 # Database
 *.db
 *.sqlite3
->>>>>>> db98c19313cb6ef120a9d30c22f075229f0bf918
+
+# ML Models (large files)
+backend/models/*.pkl
+backend/models/*.h5
+backend/models/*.pt
+backend/models/*.pth
+backend/data/urls/raw/*.csv
+backend/data/urls/raw/*.json
+backend/data/urls/raw/*.txt
+
+# Generated folders
+/ios
+/android

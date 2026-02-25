@@ -26,6 +26,10 @@ pyzbar>=0.1.9
 
 # URL 처리 및 HTTP 요청
 requests>=2.31.0
+tldextract>=5.0.0
+
+# Hugging Face 통합
+huggingface-hub>=0.20.0
 
 # 머신러닝 및 데이터 처리
 pandas>=2.1.0

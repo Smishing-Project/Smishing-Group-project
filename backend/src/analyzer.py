@@ -5,6 +5,7 @@ from .ocr.ocr_extractor import OCRExtractor
 from .ocr.qr_decoder import QRDecoder
 from .url.url_extractor import URLExtractor
 from .url.safe_browsing import SafeBrowsingChecker
+from .url.url_classifier import URLClassifier
 
 # 스미싱 문자 분석 통합 클래스
 class SmishingAnalyzer:
@@ -16,6 +17,7 @@ class SmishingAnalyzer:
         self.qr_decoder = QRDecoder()
         self.url_extractor = URLExtractor()
         self.safe_browsing = SafeBrowsingChecker(api_key)
+        self.url_classifier = URLClassifier()  # ML 모델 추가
         
         print("모든 모듈 초기화 완료!\n")
 
